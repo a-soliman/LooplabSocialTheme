@@ -41,6 +41,20 @@ body {
 		background: $white;
 		padding: 4px;
 		border-radius: 5px;
-		font-size: $font-size;
+		font-size: $icon-size;
+	}
+}
+
+#explore-section {
+	.fa {
+		color: $white;
+		background: #333;
+		padding: 4px;
+		border-radius: 5px;
+		font-size: $icon-size;
+	}
+
+	.bg-white {
+		background-color: $white;
 	}
 }
