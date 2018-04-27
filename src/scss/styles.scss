@@ -7,3 +7,8 @@ body {
 	background: $bg-color;
 	color: $font-color;
 }
+
+.navbar {
+	border-bottom: 3px solid $primary-color;
+	opacity: 0.8;
+}
