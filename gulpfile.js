@@ -35,10 +35,22 @@ gulp.task('copy_images', () => {
 		.pipe(livereload())
 });
 
+// Move fonts folder to dist
+gulp.task('fa-copy', () => {
+	return gulp.src('node_modules/font-awesome/fonts/*')
+		.pipe(gulp.dest(_dist_path + 'fonts/'))
+})
+
+// Move fontawesome css to dist
+gulp.task('fa-css', () => {
+	return gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
+		.pipe(gulp.dest(_dist_path + 'css/'))
+})
+
 
 gulp.task('sass', () => {
 	console.log('Starting SASS task')
-	return gulp.src ('src/scss/styles.scss')
+	return gulp.src (['node_modules/bootstrap/scss/bootstrap.scss', 'src/scss/styles.scss'])
 		.pipe(plumber( function (err) {
 			console.log('SASS task error');
 			console.log(err);
@@ -57,6 +69,13 @@ gulp.task('sass', () => {
 gulp.task('sass:watch', () => {
 	gulp.watch('src/sass/**/*.scss', ['sass']);
 });
+
+gulp.task('copy-js', () => {
+	console.log('copying bootstrap js from node_modules')
+	return gulp.src (['node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js'])
+		.pipe(gulp.dest('dist/js'))
+		.pipe(livereload())
+})
 
 gulp.task('scripts', () => {
 	console.log('Starting SCRIPTS task')
@@ -79,7 +98,7 @@ gulp.task('scripts', () => {
 		.pipe(livereload())
 })
 
-gulp.task('default', ['copy', 'copy_images','scripts', 'sass'],() => {
+gulp.task('default', ['copy','copy-js', 'fa-copy', 'fa-css', 'copy_images','scripts', 'sass'],() => {
 	console.log('Starting DEFAULT task')
 })
 
